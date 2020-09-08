@@ -12,7 +12,12 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $courses = Course::all();
+        $courses = Course::paginate(2);
         return new CourseCollection($courses);
+    }
+
+    public function single(Course $course)
+    {
+        return new CourseResource($course); 
     }
 }

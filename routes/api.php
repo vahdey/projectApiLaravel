@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 */
 Route::prefix('v1')->namespace('Api\v1')->group(function() {
     Route::get('/courses' , 'CourseController@index');
+    Route::get('/courses/{course}' , 'CourseController@single');
 });
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();

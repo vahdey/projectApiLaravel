@@ -15,8 +15,19 @@ class Course extends JsonResource
     public function toArray($request)
     {
         return [
-            'title' => $this->title,
+            'title' => $this->title, 
             'body' => $this->body,
+            'price' => $this->price,
+            'image' => $this->image,
+            'createTime' => jdate($this->created_at)->format('datetime'),
+            'episodes' => new EpisodeCollection($this->episodes)
+        ];
+    }
+
+    public function with($request)
+    {
+        return [
+          'status' => 'success'
         ];
     }
 }
