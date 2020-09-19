@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api\v1;
-
+use App\Exceptions\CourseIsPrivateException;
 use App\Course;
 use App\Http\Resources\v1\Course as CourseResource;
 use App\Http\Resources\v1\CourseCollection;
@@ -18,6 +18,7 @@ class CourseController extends Controller
 
     public function single(Course $course)
     {
-        return new CourseResource($course); 
+        throw new CourseIsPrivateException();
+        return new CourseResource($course);
     }
 }
