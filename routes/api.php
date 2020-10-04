@@ -16,5 +16,7 @@ Route::prefix('v1')->namespace('Api\v1')->group(function() {
     Route::get('/courses' , 'CourseController@index');
     Route::get('/courses/{course}' , 'CourseController@single');
     Route::post('/courses' , 'CourseController@store');
+    Route::post('login' , 'UserController@login');
+    Route::post('register' , 'UserController@register');
 });
 
