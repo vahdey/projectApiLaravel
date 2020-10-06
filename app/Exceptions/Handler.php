@@ -8,6 +8,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+use Illuminate\Auth\AuthenticationException;
 
 
 class Handler extends ExceptionHandler
@@ -69,5 +70,16 @@ class Handler extends ExceptionHandler
                 'status' => 'error'
             ], 404)
             : parent::render($request, $exception);
+    }
+
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return $request->expectsJson()
+            ? response()->json(['data' => [
+                'message' => 'شما اجازه دسترسی ندارید' ],
+                'status' => 'error'
+            ], 401)
+            : redirect()->guest(route('login'));
     }
 }

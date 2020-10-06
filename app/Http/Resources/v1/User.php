@@ -18,7 +18,7 @@ class User extends JsonResource
         return [
             'name' => $this->name,
             'email' => $this->email,
-            'api_token' => 'sadasfa'
+            'api_token' => $this->api_token
         ];
     }
 }

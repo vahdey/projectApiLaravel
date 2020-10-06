@@ -5,6 +5,7 @@ use App\Http\Resources\v1\User as UserResource;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -24,6 +25,10 @@ class UserController extends Controller
             ],403);
         }
 
+        auth()->user()->update([
+            'api_token' => Str::random(100)
+        ]);
+
         return new UserResource(auth()->user());
     }
 
@@ -40,6 +45,7 @@ class UserController extends Controller
             'name' => $validData['name'],
             'email' => $validData['email'],
             'password' => bcrypt($validData['password']),
+            'api_token' => Str::random(100)
         ]);
 
         return new UserResource($user);
